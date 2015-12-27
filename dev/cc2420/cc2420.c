@@ -1016,7 +1016,7 @@ cc2420_read(void *buf, unsigned short bufsize)
     
     if(footer[1] & FOOTER1_CRC_OK) {
       cc2420_last_rssi = footer[0] + RSSI_OFFSET;
-      cc2420_last_correlation = footer[1] & FOOTER1_CORRELATION;
+      cc2420_last_correlation = (footer[1] & FOOTER1_CORRELATION) | FOOTER1_CRC_OK;
       if(!poll_mode) {
         /* Not in poll mode: packetbuf should not be accessed in interrupt context.
          * In poll mode, the last packet RSSI and link quality can be obtained through
