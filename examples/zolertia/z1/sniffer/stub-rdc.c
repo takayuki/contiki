@@ -42,6 +42,7 @@
 
 #include "net/mac/mac.h"
 #include "net/mac/rdc.h"
+#include "net/netstack.h"
 /*---------------------------------------------------------------------------*/
 static void
 send(mac_callback_t sent, void *ptr)
@@ -67,7 +68,7 @@ input(void)
 static int
 on(void)
 {
-  return 1;
+  return NETSTACK_RADIO.on();
 }
 /*---------------------------------------------------------------------------*/
 static int
@@ -85,6 +86,7 @@ cca(void)
 static void
 init(void)
 {
+  on();
 }
 /*---------------------------------------------------------------------------*/
 const struct rdc_driver stub_rdc_driver = {
